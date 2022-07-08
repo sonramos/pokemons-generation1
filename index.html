@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Pokédex</title>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center mt-5">Pokédex</h1>
+    
+    <div class="text-end">
+      <button
+        type="button"
+        class="btn btn-secondary rounded-circle"
+        data-bs-toggle="modal"
+        data-bs-target="#pokeFormModal"
+      >
+        +
+      </button>
+    </div>
+
+    <section class="poke-deck row mt-3"></section>    
+  </div>
+  <form id="pokeForm">
+    <div class="modal fade" id="pokeFormModal" tabindex="-1" aria-labelledby="pokeFormLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="pokeFormLabel">Novo Pokémon</h5>
+            <button type="button" class="close mr-2" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="pkm-name">Nome</label>
+              <input type="text" class="form-control" id="pkm-name" name="name">
+            </div>
+            <div class="form-group">
+              <label for="pkm-image">Image</label>
+              <input type="text" class="form-control" id="pkm-image" name="image">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onsubmit="resetForm()">Confirmar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+   <!-- This script places a badge on your repl's full-browser view back to your repl's cover page. Try various colors for the theme: dark, light, red, orange, yellow, lime, green, teal, blue, blurple, magenta, pink! -->
+  <script src="https://replit.com/public/js/replit-badge.js" theme="blue" defer></script> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <script src="js/main.js" type="module"></script>
+</body>
+</html>
