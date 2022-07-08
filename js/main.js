@@ -2,10 +2,12 @@ import dataset from './model/dataset.js';
 import pokemons from './model/pokemon.js';
 
 
-const pokeForm = document.querySelector('#pokeForm');
-
-pokemons.load(dataset);
-
+function loadFoods() {
+  if (localStorage.getItem('pokemons-app:loaded') !== 'ok') {
+    pokemons.load(dataset);
+    localStorage.setItem('pokemons-app:loaded', 'ok');
+  };
+};
 
 function loadPokemons() {
     const pokemon = pokemons.readAll();
@@ -21,7 +23,7 @@ function loadPokemons() {
             <div class="card">
               <div class="card-header text-center font-weight-bold">
                 <span class="pkm-name">
-                  ${card.name}
+                ${card.name}
                 </span>
               </div>
               <div class="card-body p-0">
@@ -35,23 +37,33 @@ function loadPokemons() {
   
     cardsDeck.insertAdjacentHTML('beforeend', cardsView);
   };
+
+  function loadFormValues(title, pkmName, pkmImage) {
+    const formLabel = document.querySelector('#pokeFormLabel');
+    const pkmNameInput = document.querySelector('#pkm-name');
+    const pkmImageInput = document.querySelector('#pkm-image');
   
-  pokeForm.onsubmit = (e) => {
-    e.preventDefault();
+    formLabel.innerHTML = title;
+    pkmNameInput.value = pkmName;
+    pkmImageInput.value = pkmImage;
+  }
+  
+  function loadFormCreatePokemon(){
+    const pokeForm = document.querySelector('#pokeForm');
 
-    const pokemon = Object.fromEntries(new FormData(pokeForm));
+    loadFormValues('Novo Pokémon', '', '');
+    
+    pokeForm.onsubmit = (e) => {
+      e.preventDefault();
+      
+      const pokemon = Object.fromEntries(new FormData(pokeForm));
+      const newPokemon = pokemons.create(pokemon);
 
-    const newPokemon = pokemons.create(pokemon);
+      createCardView(newPokemon);      
+    };
+  }
 
-    console.log(newPokemon);
+  window.loadFormCreatePokemon = loadFormCreatePokemon;
 
-    createCardView(newPokemon);
-
-    //$('#pokeFormModal').modal('hide');
-  };
-
-  function resetForm(){
-    document.getElementById('#pokeForm').reset();
-  };
-
+  loadFoods();
   loadPokemons();
